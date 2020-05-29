@@ -49,8 +49,7 @@ doGet(request, response);
             rd.forward(request, response);
         }
         else{
-        	beanyBean bean=new beanyBean();
-            bean.setSearch(search);   
+        	beanyBean bean=new beanyBean(); 
             SQLcon.search = search;
             request.setAttribute("bean",bean);
               

@@ -2,20 +2,27 @@ package a;
 
 public class beanyBean {
 	
-	private String search;
-	private String result;  
+	private String bearResult;
+	private String ikeaResult;
+	private String mastersResult;
       
-    public String getSearchPhrase() {  
-        return search;  
-    }  
-    public void setSearch(String search) {  
-        this.search = search;  
-    }  
-    public void setResult(String result) {  
-        this.result = result;  
+    public void setMastersResult(String mastersResult) {  
+        this.mastersResult = mastersResult;  
     }
-    public String getResult() {  
-        return result;
+    public String getMastersResult() {  
+        return mastersResult;
+    }
+    public void setBearResult(String bearResult) {  
+        this.bearResult = bearResult;  
+    }
+    public String getBearbaseResult() {  
+        return bearResult;
+    }
+    public void setIkeaResult(String ikeaResult) {  
+        this.ikeaResult = ikeaResult;  
+    }
+    public String getIkeaResult() {  
+        return ikeaResult;
     }
     
 }  

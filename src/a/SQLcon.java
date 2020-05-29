@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class SQLcon {
 
@@ -14,8 +15,9 @@ public class SQLcon {
 	static ResultSet rs = null;
 	
 	static String search;
-	static String currentDatabase;
-	static String currentColumn;
+	static ArrayList<String> bearbaseResult = new ArrayList<String>();
+	static ArrayList<String> ikeanamesResult = new ArrayList<String>();
+	static ArrayList<String> masterscpResult = new ArrayList<String>();
 
 	static boolean connectSQL() {
 
@@ -47,14 +49,38 @@ public class SQLcon {
 
 		try {	
 			PreparedStatement bearbaseStatement = conn.prepareStatement("SELECT * FROM bearbase WHERE `Character` like '%"+search+"%' OR `Origin` like '%"+search+"%' OR `Creator` like '%"+search+"%' OR `Notes` like '%"+search+"%'");
+			PreparedStatement ikeanamesStatement = conn.prepareStatement("SELECT * FROM ikea_names WHERE `name` like '%"+search+"%' OR `description` like '%"+search+"%'");
+			PreparedStatement masterscpStatement = conn.prepareStatement("SELECT * FROM masterscplist WHERE `Title` like '%"+search+"%' OR `Classification` like '%"+search+"%' OR `Type` like '%"+search+"%' OR `Author` like '%"+search+"%' OR `Leaked_info` like '%"+search+"%'");
 
 			rs = bearbaseStatement.executeQuery();
+			
+			String result;
 
 			// ResultSet return
 			while (rs.next()) {
-				System.out.println("Name: "+rs.getString(1)+" Origin: "+rs.getString(2)+" Creator: "+rs.getString(3)+" Desc: "+rs.getString(4));
-
+				result = "Name: "+rs.getString(1)+" Origin: "+rs.getString(2)+" Creator: "+rs.getString(3)+" Desc: "+rs.getString(4);
+				bearbaseResult.add(result);
 			}
+			
+			rs = ikeanamesStatement.executeQuery();
+
+			// ResultSet return
+			while (rs.next()) {
+				result = "Name: "+rs.getString(1)+" Desc: "+rs.getString(2)+" Extra: "+rs.getString(3);
+				ikeanamesResult.add(result);
+			}
+			
+			rs = masterscpStatement.executeQuery();
+
+			// ResultSet return
+			while (rs.next()) {
+				result = "SCP: "+rs.getInt(1)+" Title: "+rs.getString(2)+" Classification: "+rs.getString(4)+" Type: "+rs.getString(5);
+				masterscpResult.add(result);
+			}
+			
+			System.out.println(bearbaseResult.get(0).toString());
+			System.out.println(ikeanamesResult.get(0).toString());
+			System.out.println(masterscpResult.get(0).toString());
 
 			conn.close();
 
