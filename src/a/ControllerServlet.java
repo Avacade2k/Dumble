@@ -1,6 +1,9 @@
 package a;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +36,34 @@ public class ControllerServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+doGet(request, response);
+		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html");  
+        PrintWriter out=response.getWriter();  
+          
+        String search=request.getParameter("search");
+        
+        if(search.isEmpty()){
+        	RequestDispatcher rd=request.getRequestDispatcher("error.jsp");  
+            rd.forward(request, response);
+        }
+        else{
+        	beanyBean bean=new beanyBean();
+            bean.setSearch(search);   
+            SQLcon.search = search;
+            request.setAttribute("bean",bean);
+              
+            if(SQLcon.connectSQL()){  
+            	SQLcon.stateSQL();
+                RequestDispatcher rd=request.getRequestDispatcher("success.jsp");  
+                rd.forward(request, response);
+            }  
+            else{  
+                RequestDispatcher rd=request.getRequestDispatcher("error.jsp");  
+                rd.forward(request, response);  
+            }
+        }
 	}
 
 }
