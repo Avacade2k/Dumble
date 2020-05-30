@@ -2,6 +2,7 @@ package a;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,11 +51,15 @@ doGet(request, response);
         }
         else{
         	beanyBean bean=new beanyBean(); 
+        	bean.setSearch(search);
             SQLcon.search = search;
             request.setAttribute("bean",bean);
               
             if(SQLcon.connectSQL()){  
             	SQLcon.stateSQL();
+            	bean.setBearResult(SQLcon.bearbaseResult);
+            	bean.setIkeaResult(SQLcon.ikeanamesResult);
+            	bean.setMastersResult(SQLcon.masterscpResult);
                 RequestDispatcher rd=request.getRequestDispatcher("success.jsp");  
                 rd.forward(request, response);
             }  

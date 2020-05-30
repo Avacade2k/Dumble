@@ -1,28 +1,38 @@
 package a;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class beanyBean {
 	
-	private String bearResult;
-	private String ikeaResult;
-	private String mastersResult;
+	private List<String> bearResult;
+	private List<String> ikeaResult;
+	private List<String> mastersResult;
+	private String search;
       
-    public void setMastersResult(String mastersResult) {  
+    public void setMastersResult(ArrayList<String> mastersResult) {  
         this.mastersResult = mastersResult;  
     }
-    public String getMastersResult() {  
+    public List<String> getMastersResult() {  
         return mastersResult;
     }
-    public void setBearResult(String bearResult) {  
+    public void setBearResult(ArrayList<String> bearResult) {  
         this.bearResult = bearResult;  
     }
-    public String getBearbaseResult() {  
+    public List<String> getBearResult() {  
         return bearResult;
     }
-    public void setIkeaResult(String ikeaResult) {  
+    public void setIkeaResult(ArrayList<String> ikeaResult) {  
         this.ikeaResult = ikeaResult;  
     }
-    public String getIkeaResult() {  
+    public List<String> getIkeaResult() {  
         return ikeaResult;
+    }
+    public String getSearch(){
+    	return search;
+    }
+    public void setSearch(String search){
+    	this.search = search;
     }
     
 }  
